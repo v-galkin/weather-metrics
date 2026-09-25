@@ -1,1 +1,0 @@
-Originally grafana was suppoe to run locally, but it VPS did not have enough RAM so had to move dashboard to Grafana Cloud.
