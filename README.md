@@ -110,6 +110,11 @@ The tests cover:
 - **Scheduler**
   - a failing location being skipped while the others are still updated
 
+### Grafana Cloud alerting
+Two alert rules are set up in Grafana Cloud:
+- **Weather service down**: the `weather-service` scrape target has been unreachable for 2 minutes.
+- **Weather data stale**: a location's temperature has not changed for 2 hours. Most likely, the fetch from OpenWeatherMap is failing even though the application is still running.
+
 ## CI/CD
 
 Every push and pull request to `main` triggers a GitHub Actions pipeline (`.github/workflows/ci-cd.yml`) with four jobs:

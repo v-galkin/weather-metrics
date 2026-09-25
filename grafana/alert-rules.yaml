@@ -1,0 +1,113 @@
+apiVersion: 1
+groups:
+    - orgId: 1
+      name: weather-alerts
+      folder: Weather
+      interval: 1m
+      rules:
+        - uid: ffzbuytr1zb40f
+          title: Weather service down
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: grafanacloud-prom
+              model:
+                editorMode: code
+                expr: up{job="weather-service"}
+                instant: true
+                intervalMs: 1000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+            - refId: C
+              queryType: expression
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          noDataState: Alerting
+          execErrState: Error
+          for: 2m
+          annotations:
+            summary: The weather-service target is down (up = 0)
+          labels:
+            severity: critical
+          isPaused: false
+          notification_settings:
+            receiver: alert_email
+        - uid: afzbw4s98jf9cc
+          title: Weather data stale
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: grafanacloud-prom
+              model:
+                editorMode: code
+                expr: changes(weather_temperature_celsius[2h])
+                instant: true
+                intervalMs: 1000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+            - refId: C
+              queryType: expression
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          noDataState: NoData
+          execErrState: Error
+          for: 5m
+          labels:
+            severity: warning
+          isPaused: false
+          notification_settings:
+            receiver: alert_email
