@@ -14,6 +14,7 @@ services:
     container_name: prometheus
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./grafana-cloud-token.txt:/etc/prometheus/grafana-cloud-token.txt:ro
       - prometheus-data:/prometheus
     depends_on:
       - weather-service
@@ -21,22 +22,7 @@ services:
     networks:
       - default
 
-  grafana:
-    image: grafana/grafana
-    container_name: grafana
-    environment:
-      - GF_SERVER_ROOT_URL=https://vg-portfolio.duckdns.org/weather-grafana/
-      - GF_SERVER_SERVE_FROM_SUB_PATH=true
-    volumes:
-      - ./grafana/provisioning:/etc/grafana/provisioning
-      - grafana-data:/var/lib/grafana
-    restart: unless-stopped
-    networks:
-      - default
-      - portfolio-network
-
 volumes:
-  grafana-data:
   prometheus-data:
 
 networks:

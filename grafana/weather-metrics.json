@@ -2,7 +2,7 @@
   "apiVersion": "dashboard.grafana.app/v2",
   "kind": "Dashboard",
   "metadata": {
-    "name": "adw2pns"
+    "name": "ganq6bx"
   },
   "spec": {
     "annotations": [
@@ -42,12 +42,12 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "prometheus"
+                        "name": "grafanacloud-prom"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
                       "spec": {
-                        "editorMode": "code",
+                        "editorMode": "builder",
                         "expr": "weather_temperature_celsius",
                         "legendFormat": "{{location}}",
                         "range": true
@@ -65,7 +65,7 @@
           "description": "",
           "id": 1,
           "links": [],
-          "title": "Temperature Now",
+          "title": "Temperature Now ",
           "vizConfig": {
             "group": "bargauge",
             "kind": "VizConfig",
@@ -93,7 +93,8 @@
                         "value": 80
                       }
                     ]
-                  }
+                  },
+                  "unit": "celsius"
                 },
                 "overrides": []
               },
@@ -122,7 +123,7 @@
                 "valueMode": "text"
               }
             },
-            "version": "13.2.2"
+            "version": "13.3.0-35570731645"
           }
         }
       },
@@ -139,12 +140,12 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "prometheus"
+                        "name": "grafanacloud-prom"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
                       "spec": {
-                        "editorMode": "code",
+                        "editorMode": "builder",
                         "expr": "weather_humidity_percent",
                         "legendFormat": "{{location}}",
                         "range": true
@@ -191,7 +192,7 @@
               },
               "options": {
                 "barShape": "flat",
-                "barWidthFactor": 0.5,
+                "barWidthFactor": 0.3,
                 "effects": {
                   "barGlow": false,
                   "centerGlow": false,
@@ -212,13 +213,13 @@
                 "segmentSpacing": 0.3,
                 "shape": "gauge",
                 "showThresholdLabels": false,
-                "showThresholdMarkers": true,
+                "showThresholdMarkers": false,
                 "sizing": "auto",
                 "sparkline": true,
                 "textMode": "auto"
               }
             },
-            "version": "13.2.2"
+            "version": "13.3.0-35570731645"
           }
         }
       },
@@ -235,12 +236,12 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "prometheus"
+                        "name": "grafanacloud-prom"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
                       "spec": {
-                        "editorMode": "code",
+                        "editorMode": "builder",
                         "expr": "weather_wind_speed_mps",
                         "legendFormat": "{{location}}",
                         "range": true
@@ -285,7 +286,8 @@
                         "value": 80
                       }
                     ]
-                  }
+                  },
+                  "unit": "velocityms"
                 },
                 "overrides": []
               },
@@ -314,7 +316,7 @@
                 "valueMode": "text"
               }
             },
-            "version": "13.2.2"
+            "version": "13.3.0-35570731645"
           }
         }
       },
@@ -331,12 +333,12 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "prometheus"
+                        "name": "grafanacloud-prom"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
                       "spec": {
-                        "editorMode": "code",
+                        "editorMode": "builder",
                         "expr": "weather_temperature_celsius",
                         "legendFormat": "{{location}}",
                         "range": true
@@ -428,7 +430,7 @@
                 }
               }
             },
-            "version": "13.2.2"
+            "version": "13.3.0-35570731645"
           }
         }
       },
@@ -445,12 +447,12 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "prometheus"
+                        "name": "grafanacloud-prom"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
                       "spec": {
-                        "editorMode": "code",
+                        "editorMode": "builder",
                         "expr": "weather_humidity_percent",
                         "legendFormat": "{{location}}",
                         "range": true
@@ -524,8 +526,7 @@
                         "value": 80
                       }
                     ]
-                  },
-                  "unit": "percent"
+                  }
                 },
                 "overrides": []
               },
@@ -543,7 +544,7 @@
                 }
               }
             },
-            "version": "13.2.2"
+            "version": "13.3.0-35570731645"
           }
         }
       },
@@ -560,12 +561,12 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "prometheus"
+                        "name": "grafanacloud-prom"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
                       "spec": {
-                        "editorMode": "code",
+                        "editorMode": "builder",
                         "expr": "weather_wind_speed_mps",
                         "legendFormat": "{{location}}",
                         "range": true
@@ -639,8 +640,7 @@
                         "value": 80
                       }
                     ]
-                  },
-                  "unit": "velocityms"
+                  }
                 },
                 "overrides": []
               },
@@ -658,103 +658,157 @@
                 }
               }
             },
-            "version": "13.2.2"
+            "version": "13.3.0-35570731645"
+          }
+        }
+      },
+      "panel-7": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 7,
+          "links": [],
+          "title": "Links",
+          "vizConfig": {
+            "group": "text",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "code": {
+                  "language": "plaintext",
+                  "showLineNumbers": false,
+                  "showMiniMap": false
+                },
+                "content": "[← Back to Portfolio](https://vg-portfolio.duckdns.org)\n",
+                "mode": "markdown"
+              }
+            },
+            "version": "13.3.0-35570731645"
           }
         }
       }
     },
     "layout": {
-      "kind": "GridLayout",
+      "kind": "TabsLayout",
       "spec": {
-        "items": [
+        "tabs": [
           {
-            "kind": "GridLayoutItem",
+            "kind": "TabsLayoutTab",
             "spec": {
-              "element": {
-                "kind": "ElementReference",
-                "name": "panel-1"
+              "layout": {
+                "kind": "AutoGridLayout",
+                "spec": {
+                  "columnWidthMode": "standard",
+                  "items": [
+                    {
+                      "kind": "AutoGridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-1"
+                        }
+                      }
+                    },
+                    {
+                      "kind": "AutoGridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-2"
+                        }
+                      }
+                    },
+                    {
+                      "kind": "AutoGridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-3"
+                        }
+                      }
+                    },
+                    {
+                      "kind": "AutoGridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-4"
+                        }
+                      }
+                    },
+                    {
+                      "kind": "AutoGridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-5"
+                        }
+                      }
+                    },
+                    {
+                      "kind": "AutoGridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-6"
+                        }
+                      }
+                    },
+                    {
+                      "kind": "AutoGridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-7"
+                        }
+                      }
+                    }
+                  ],
+                  "maxColumnCount": 3,
+                  "rowHeightMode": "standard"
+                }
               },
-              "height": 8,
-              "width": 8,
-              "x": 0,
-              "y": 0
-            }
-          },
-          {
-            "kind": "GridLayoutItem",
-            "spec": {
-              "element": {
-                "kind": "ElementReference",
-                "name": "panel-2"
-              },
-              "height": 8,
-              "width": 8,
-              "x": 8,
-              "y": 0
-            }
-          },
-          {
-            "kind": "GridLayoutItem",
-            "spec": {
-              "element": {
-                "kind": "ElementReference",
-                "name": "panel-3"
-              },
-              "height": 8,
-              "width": 8,
-              "x": 16,
-              "y": 0
-            }
-          },
-          {
-            "kind": "GridLayoutItem",
-            "spec": {
-              "element": {
-                "kind": "ElementReference",
-                "name": "panel-4"
-              },
-              "height": 8,
-              "width": 8,
-              "x": 0,
-              "y": 8
-            }
-          },
-          {
-            "kind": "GridLayoutItem",
-            "spec": {
-              "element": {
-                "kind": "ElementReference",
-                "name": "panel-5"
-              },
-              "height": 8,
-              "width": 8,
-              "x": 8,
-              "y": 8
-            }
-          },
-          {
-            "kind": "GridLayoutItem",
-            "spec": {
-              "element": {
-                "kind": "ElementReference",
-                "name": "panel-6"
-              },
-              "height": 8,
-              "width": 8,
-              "x": 16,
-              "y": 8
+              "title": "Weather Metrics"
             }
           }
         ]
       }
     },
-    "links": [],
+    "links": [
+      {
+        "asDropdown": true,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [],
+        "targetBlank": false,
+        "title": "Main",
+        "tooltip": "",
+        "type": "dashboards",
+        "url": ""
+      }
+    ],
     "liveNow": false,
     "preferences": {
       "layout": {
-        "kind": "GridLayout",
+        "kind": "AutoGridLayout",
         "spec": {
-          "items": []
+          "columnWidthMode": "standard",
+          "items": [],
+          "maxColumnCount": 3,
+          "rowHeightMode": "standard"
         }
       }
     },

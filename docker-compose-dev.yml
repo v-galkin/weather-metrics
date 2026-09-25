@@ -14,17 +14,6 @@ services:
       - "9090:9090"
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./grafana-cloud-token.txt:/etc/prometheus/grafana-cloud-token.txt:ro
     depends_on:
       - weather-service
-
-  grafana:
-    image: grafana/grafana
-    container_name: grafana
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./grafana/provisioning:/etc/grafana/provisioning
-      - grafana-data:/var/lib/grafana
-
-volumes:
-  grafana-data:

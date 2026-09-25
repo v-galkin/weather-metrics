@@ -5,4 +5,5 @@ venv/
 __pycache__/
 .pytest_cache/
 .ruff_cache/
-.weather_metrics.md
+weather_metrics.md
+grafana-cloud-token.txt
