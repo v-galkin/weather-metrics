@@ -47,3 +47,35 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/${{github.repository}}:latest
+
+  deploy:
+    needs: build-and-push
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    concurrency: deploy
+    steps:
+      - name: Set up SSH
+        env:
+          SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "$VPS_HOST" >> ~/.ssh/known_hosts
+
+      - name: Deploy to VPS
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+        run: |
+          ssh -i ~/.ssh/deploy_key "$VPS_USER@$VPS_HOST" '
+            set -e
+            cd ~/weather-metrics
+            git pull --ff-only
+            docker compose -f docker-compose-deploy.yml pull
+            docker compose -f docker-compose-deploy.yml up -d --force-recreate
+          '
+
+      - name: Check the service is healthy
+        run: curl -fsS --retry 6 --retry-delay 5 --retry-connrefused https://vg-portfolio.duckdns.org/weather/health

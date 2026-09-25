@@ -1,6 +1,6 @@
 services:
   weather-service:
-    build: .
+    image: ghcr.io/v-galkin/weather-metrics:latest
     container_name: weather-service
     env_file:
       - .env
